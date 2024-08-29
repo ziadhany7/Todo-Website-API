@@ -1,66 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+# Todo Website API Documentation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This API documentation provides a detailed overview of the Todo website, which allows users to manage their daily tasks efficiently. The API supports full CRUD (Create, Read, Update, Delete) operations, enabling users to add, view, update, mark as complete, and delete tasks. It is designed to facilitate seamless task management and improve productivity.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Endpoints
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Retrieve All Tasks
 
-## Learning Laravel
+**Endpoint:**  
+`GET http://localhost:8000/api/v1/tasks`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Description:**  
+This endpoint allows users to retrieve a list of all tasks. It returns an array of task objects, each containing details such as task ID, title, description, status (complete or incomplete), and timestamps.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**Request Headers:**
+- `Accept: application/json`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Body:**  
+No body is required for this request.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Retrieve a Task
 
-### Premium Partners
+**Endpoint:**  
+`GET http://localhost:8000/api/v1/tasks/1`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+**Description:**  
+This endpoint retrieves the details of a specific task using its unique identifier (task ID). It returns the task’s title, description, status, and timestamps, allowing users to view the task's complete information.
 
-## Contributing
+**Request Headers:**
+- `Accept: application/json`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Body:**  
+No body is required for this request.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Storing a Task (POST)
 
-## Security Vulnerabilities
+**Endpoint:**  
+`POST http://localhost:8000/api/v1/tasks`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Description:**  
+This endpoint allows users to create and store a new task. Users need to provide the task's title and description. The task is stored in the database and returns the newly created task’s details, including its unique ID and timestamps.
 
-## License
+**Request Headers:**
+- `Accept: application/json`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Body (JSON format):**
+
+```json
+{
+    "name": "api 1",
+    "is_completed": true
+}
+```
+
+---
+
+### 4. Storing a Task (PUT)
+
+**Endpoint:**  
+`PUT http://localhost:8000/api/v1/tasks/11`
+
+**Description:**  
+This endpoint allows users to update an existing task by its ID. Users need to provide the task's title and description. The task is updated in the database and returns the updated task’s details, including its unique ID and timestamps.
+
+**Request Headers:**
+- `Accept: application/json`
+
+**Body (JSON format):**
+
+```json
+{
+    "name": "ZOZ API UPDATED"
+}
+```
+
+---
+
+### 5. Mark a Task as Complete
+
+**Endpoint:**  
+`PATCH http://localhost:8000/api/v1/tasks/11/complete`
+
+**Description:**  
+This endpoint allows users to update a specific task’s status to complete. By providing the task ID, users can mark the task as done, which updates its status in the database.
+
+**Request Headers:**
+- `Accept: application/json`
+
+**Body (JSON format):**
+
+```json
+{
+    "is_completed": true
+}
+```
+
+---
+
+### 6. Delete a Task
+
+**Endpoint:**  
+`DELETE http://localhost:8000/api/v1/tasks/11`
+
+**Description:**  
+This endpoint allows users to delete a specific task from the database. By providing the task ID, the user can remove the task permanently, ensuring their task list remains up-to-date and clutter-free.
+
+**Request Headers:**
+- `Accept: application/json`
+
+**Body:**  
+No body is required for this request.
